@@ -1,11 +1,16 @@
 const express = require("express");
+const userRoutes = require("./routes/userRoutes");
 
-const PORT = 8080;
+const port = 8080;
 
 const app = express();
 
 app.use(express.json());
 
-console.log("Hello World!");
+app.get("/", (req, res) => {
+    res.send("Homepage");
+});
 
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+app.use("/users", userRoutes);
+
+app.listen(port, () => console.log(`Server is listening on port ${port}`));

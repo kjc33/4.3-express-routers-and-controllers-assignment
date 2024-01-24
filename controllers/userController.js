@@ -104,10 +104,28 @@ deleteUserById = (req, res) => {
   }
 };
 
+// POST User Login by ID
+userLogin = (req, res) => {
+  const { username, password } = req.body;
+  const userLoggedIn = user.find((u) => u.username === username && u.password === password);
+  try {
+    if (userLoggedIn) {
+      res.send("Login Successful");
+    } else {
+      res.status(404).send("Login failed.");
+    }
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   addNewUser,
   updateUserById,
-  deleteUserById
+  deleteUserById,
+  userLogin,
 };

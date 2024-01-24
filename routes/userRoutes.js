@@ -12,4 +12,10 @@ router.get("/:id", userControllers.getUserById);
 // POST /users - Add New User
 router.post("/", userControllers.addNewUser);
 
+// PUT /users/:id - Update User by ID
+router.put("/:id", userControllers.updateUserById);
+
+// DELETE /users/:id - Delete User by ID
+router.delete("/:id", userControllers.deleteUserById);
+
 module.exports = router;

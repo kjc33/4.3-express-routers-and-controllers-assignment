@@ -63,8 +63,51 @@ addNewUser = (req, res) => {
   }
 };
 
+// PUT User by ID
+updateUserById = (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const updateUser = user.find((f) => f.id === id);
+    if (updateUser) {
+      const body = req.body;
+      const updatedUser = {
+        ...updateUser,
+        ...body,
+      };
+      user[user.indexOf(updateUser)] = updatedUser;
+      res.send(updatedUser);
+    } else {
+      res.status(404).send("User not found.");
+    }
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+// DELETE User by ID
+deleteUserById = (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const deleteUser = user.find((f) => f.id === id);
+    if (deleteUser) {
+      user.splice(user.indexOf(deleteUser), 1);
+      res.send(deleteUser);
+    } else {
+      res.status(404).send("User not found.");
+    }
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
-  addNewUser
+  addNewUser,
+  updateUserById,
+  deleteUserById
 };
